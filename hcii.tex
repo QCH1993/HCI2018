@@ -3,7 +3,7 @@
 \usepackage{amssymb}
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
-
+\usepackage{subfigure}
 \usepackage{url}
 \urldef{\mailsa}\path|{qian_chen}@sjtu.edu.cn|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
@@ -33,16 +33,17 @@ Domain Feat}
 
 \section{Introduction}
 Hitherto, mechanical arm, as a vital product in industry field, has been broadly
-used in medical, exploration, rescue field etc. However, the mistake operation
+used in medical, exploration, rescue field etc. However, the mistaken operation
 caused by human error, which should have been avoided, is still one of the
-dominant reasons causing accidents. As we all know, the state of human has a
-close link to the cognitive state of human and in some degree emotion is the
-main reason causing the change of the cognitive state, therefore, one of
+dominant reasons causing accidents. As we all know, the performance of human has a
+close link to the cognitive state of human and to some degree emotion is the
+main reason causing the change of the cognitive state. Therefore, one of the
 critical ways to avoid huamn error in mechanical arm operation is recognizing
 the emotion during the opreration process through detecting the physiological
-signal. Since R. W. Picard has defined Affective Computing $(AC)^{\cite{AC}}$
+signal. Since R. W. Picard has defined $Affective\ Computing\ (AC)^{\cite{AC}}$
 in 1995, affective computing has been a critical field in human-computer
-interaction area.  such as Blood Volume Pressure (BVP), Skin Conductance
+interaction area. There are numerous physiological signals which could reflect
+the cognitive state of human, such as Blood Volume Pressure (BVP), Skin Conductance
 Response (SCR), Respiration (RESP), Electrocardiogram (ECG), Electromyogram (EMG),
 Electrocorticogram (ECoG), Electroencephalogram (EEG), Heart Rate (HR), Oxygen
 Saturation (SaO2) and Surface Temperature (ST)\cite{KR}. In all physiological
@@ -51,7 +52,7 @@ activity. Therefore this paper chooses to use 32 dry electrodes EEG signal acqui
 equipment to obtain EEG signal data during mechanical arm operation.
 
 
-There are lots of models which has been proposed to describe the emotion, such as
+There are lots of models which have been proposed to describe the emotion, such as
 six basic emotions model proposed by Ekman et al.\cite{Ekman}, eight basic emotions
 model proposed by Plutchik\cite{Plutchik} and the valence-arousal scale proposed
 by Russell\cite{Russell}. For simplifing this problem, this paper chooses to use the
@@ -60,7 +61,7 @@ And the valence reflecting the positive or negative aspect of the subjects is en
 to describe the cognitive state of the subjects.
 
 
-Besides the model of emotion, the way to obatain the ground truth of the subjects
+Besides the model of emotion, the way to obatain the ground truth of the subjects cognitive state
 is also crucial. Almost all research in Affective Computing field use the self-assessment
 scores to estimate the true cognitive state of the subjects. However, even the subjects
 themselves could hardly to retell the exact emotion state in the mechanical arm operation
@@ -110,32 +111,168 @@ our experiment.
 
 \section{Experiment Setup}
 \subsection{Apparatus}
-There are 3 key equipment we use in our experiment: EEG Signal Acquisition Equipment,
-Mechanical Arm and Joystick. And there are 3 personal computer for communicating
+There are 3 key equipments we use in our experiment: EEG Signal Acquisition Equipment,
+Mechanical Arm and Joystick. And there are 3 personal computers for communicating
 with EEG equipment, controling movement of mechanical arm through joystick and
 showing the end point of the mechanical arm.
 \paragraph{EEG Signal Acquisition Equipment:}
-The EEG Signal Acquisition Equipment we apply is the Cognionics HD-72 Dry EEG
-Headset(see in Fig.~\ref{fig:EEGequipment}).
+The EEG Signal Acquisition Equipment we apply is the $Cognionics\ HD-72\ Dry\ EEG
+\ Headset^{\cite{cognionics}}$ (see in Fig.~\ref{fig:EEGequipment}).
 Considering the difficulty of wearing EEG equipment and the comfort of the subjects,
-we choose 32 dry electrodes to obtain the EEG signal, which are showed in
+we choose 32 dry electrodes, according to the international 10-20 system,
+to obtain the EEG signal, which are showed in Fig.~\ref{fig:sensorloc}.
+The sampling rate is 500Hz which is sufficient for obtaining EEG signal.
+\begin{figure}
+    \centering
+    \includegraphics[height=4cm]{images/1}
+    \caption{Cognionics HD-72 Dry EEG Headset}
+    \label{fig:EEGequipment}
+% \end{figure}
+% \begin{figure}
+    \centering
+    \includegraphics[height=8cm]{images/2}
+    \caption{32 dry electrodes sensor location}
+    \label{fig:sensorloc}
+\end{figure}
 
+\paragraph{Mechanical Arm:}
+The mechanical arm we apply is the $Dobot\ Magician\ mechnical\ arm^{\cite{dobot}}$
+(see in Fig.~\ref{fig:dobot}), because it supports reprogramming according to
+the need of users and the control precision (0.2mm) is adequate for our experiment.
 
 \begin{figure}
-\centering
-\includegraphics[height=6.2cm]{images/1}
-\caption{}
-\label{fig:EEGequipment}
+    \centering
+    \includegraphics[height=4cm]{images/3}
+    \caption{Dobot Magician mechanical arm}
+    \label{fig:dobot}
+\end{figure}
+
+\paragraph{Joystick:}
+The joystick we use is the flying joystick named $Extreme\ 3D\ Pro^{\cite{joystick}}$
+produced by Logitech (see in Fig.~\ref{fig:joystick}).
+The perfect ergonomic design with a custom twist-handle rudder relies
+its one-handed control resulting in a smaller device footprint.
+There are six programmable buttons on the base.
+Each programmable button can be configured to execute simple single commands or
+intricate macros involving multiple keystrokes, mouse events, and more.
+In our experiment, we only operate the rocker in six basic direction movement,
+which are left-right direction, front-behind direction and left-right rotation.
+
+\begin{figure}
+    \centering
+    \includegraphics[height=4cm]{images/4}
+    \caption{Logitech Extreme 3D Pro joystick}
+    \label{fig:joystick}
+\end{figure}
+
+In our experiment, we use Robot Operating System (ROS) to receive the control
+signal from joystick, release the control signal to mechnical arm, recieve the
+position information of the end point of the mechnical arm and record the track
+information with real time mark point in a sampling rate of 10Hz
+(code url: \url{https://github.com/QCH1993/DobotMagician}). Meanwhile,
+real time EEG signal are recorded with mark information which could be used in
+subsequent time correcting process.
+
+\subsection{Experiment Protocol}
+Five healthy participants (two females, three males), aged between 23 and 25,
+participated in the experiment. Before all experiments, all participants were
+asked to have adequate sleepness.
+
+In our experiment, firstly, participants were asked to read the experiment
+procedures and notes and the experimenter would read out the procedures and notes
+for a second reminder. And the experimenter was also present there to answer any questions.
+At the beginning of each experiment,
+one minute of free exploration were given to remove the interference caused by unfamiliarity.
+And then the subjects were asked to operate the mechnical arm to touch
+the different color point on the desktop according to a certain order.
+We designed three levels of operating tasks in different difficulty (easy, medium and hard mode)
+according to the number and position of points and the time constraint. In easy
+mode, the subjects were asked to touch three colored points without time pressure.
+In medium mode, the subjects were asked to touch five colored points without
+time pressure. In hard mode, the subjects were asked to touch five colored points
+in 90 seconds. To eliminate the interplay between the three tasks,
+a 30 seconds break time for resetting was added after each task.
+
+The experiment enviroment is showed in Fig.~\ref{fig:experiment}.
+The Fig.~\ref{fig:experiment:a} is the overview of the entire experiment environment.
+The subject operation platform (see in Fig.~\ref{fig:experiment:b}) is insulated
+from the mechnical arm platform and
+all the information helping the subjects to move the mechnical arm was from three
+camera set around the mechnical arm and on the end point of the mechnical arm
+(see in Fig.~\ref{fig:experiment:c}). The screen interface presenting the information from
+cameras are showed in Fig.~\ref{fig:experiment:d}.
+
+\begin{figure}
+  \centering
+  \subfigure[overview]{
+    \label{fig:experiment:a} %% label for first subfigure
+    \includegraphics[width=1.5in]{images/5}}
+  \hspace{0.5in}
+  \subfigure[the subject operating joystick]{
+    \label{fig:experiment:b} %% label for second subfigure
+    \includegraphics[width=1.5in]{images/6}}
+
+  \subfigure[the mechnical arm operation platform]{
+    \label{fig:experiment:c} %% label for second subfigure
+    \includegraphics[width=1.5in]{images/7}}
+  \hspace{0.5in}
+  \subfigure[the screen showing camera information]{
+    \label{fig:experiment:d} %% label for second subfigure
+    \includegraphics[width=1.5in]{images/8}}
+  \caption{The experiment environment}
+  \label{fig:experiment} %% label for entire figure
+\end{figure}
+
+\section{Data Process Method}
+Traditional pattern recognition process includes 4 steps: data preprocess,
+feature extraction, feature selection and classification design. In this paper,
+we use several classic methods in these field to explore their performance in
+our experiment data.
+\subsection{Data Preprocess}
+For one subject experiment, the raw data are drawed in Fig.~\ref{fig:wave:a}.
+And then according to the track mark and EEG signal mark, the EEG signal and
+the track were aligned in time. And we divided the entire EEG signal to
+easy mode, medium mode and hard mode procedure according to the mark information.
+The divided easy mode raw data, as an example, are showed in Fig.~\ref{fig:wave:b}.
+Next, to remove the disturbance of EMG signal and the interference of various
+electromagnetic signal which are generally high frequecy signals, we use band
+filter to filter out 1-64Hz signal, which are the dominant frequency band of EEG
+signal(see in Fig.~\ref{fig:wave:c}). Because the EEG signal has extra low SNR,
+the filtered signal at the beginning and end part is unstable. Therefore we selected
+to remove the first and last 5 seconds data (see in Fig.~\ref{fig:wave:d}).
+And for the computing convenience, the selected data are normalized to [-1,1] area
+according to all 32 channels signal by min-max normlization.
+
+\begin{figure}
+  \centering
+  \subfigure[raw data]{
+    \label{fig:wave:a} %% label for first subfigure
+    \includegraphics[width=4in]{images/9}}
+
+  \subfigure[easy mode raw data]{
+    \label{fig:wave:b} %% label for second subfigure
+    \includegraphics[width=4in]{images/10}}
+
+  \subfigure[filtered data]{
+    \label{fig:wave:c} %% label for second subfigure
+    \includegraphics[width=4in]{images/11}}
+
+  \subfigure[selected data]{
+    \label{fig:wave:d} %% label for second subfigure
+    \includegraphics[width=4in]{images/12}}
+
+  \subfigure[normalized data]{
+    \label{fig:wave:e} %% label for second subfigure
+    \includegraphics[width=4in]{images/13}}
+
+  \caption{Data preprocess wave charts}
+  \label{fig:wave} %% label for entire figure
 \end{figure}
 
 
-\subsection{Experiment Protocol}
-
-
-\section{Data Process Method}
-
-\subsection{Data Preprocess}
 \subsection{Multi-scale Feature Extration}
+The feature extraction procedure
+
 \subsection{Feature Selection}
 \subsection{Classification}
 
@@ -173,7 +310,14 @@ Journal of personality and social psychology, 1980, 39(6): 1161.
 Feature extraction and selection for emotion recognition from EEG[J].
 IEEE Transactions on Affective Computing, 2014, 5(3): 327-339.
 
-\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
+\bibitem{cognionics} Documents of The Cognionics HD-72 Dry EEG,
+\url{http://www.cognionics.com/images/docs/HD72.pdf}
+
+\bibitem{dobot} Specification of The Dobot Magician mechnical arm,
+\url{https://www.dobot.cc/dobot-magician/specification.html}
+
+\bibitem{joystick} Features of The Extreme 3D Pro joystick,
+\url{https://www.logitechg.com/en-us/product/extreme-3d-pro-joystick#featuresAnchor}
 
 \end{thebibliography}
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.12.20)  4 FEB 2018 09:43
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.12.20)  4 FEB 2018 23:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -154,6 +154,25 @@ File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
 ))
 \Gin@req@height=\dimen125
 \Gin@req@width=\dimen126
+) (/usr/local/texlive/2017/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip45
+\subfigcapskip=\skip46
+\subfigcaptopadj=\dimen127
+\subfigbottomskip=\skip47
+\subfigcapmargin=\dimen128
+\subfiglabelskip=\skip48
+\c@subfigure=\count116
+\c@lofdepth=\count117
+\c@subtable=\count118
+\c@lotdepth=\count119
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/local/texlive/2017/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip49
+\subfig@bottom=\skip50
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -179,8 +198,7 @@ LaTeX Font Info:    Try loading font information for U+msa on input line 26.
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 26.
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
@@ -188,14 +206,56 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ] [2]
 File: images/1.png Graphic file (type bmp)
 <images/1.png>
- [3] [4] (./hcii.aux) ) 
-Here is how much of TeX's memory you used:
- 1448 strings out of 493010
- 17665 string characters out of 6134663
- 89391 words of memory out of 5000000
- 5412 multiletter control sequences out of 15000+600000
- 8521 words of font info for 44 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 28i,5n,26p,183b,333s stack positions out of 5000i,500n,10000p,200000b,80000s
+File: images/2.eps Graphic file (type eps)
+<images/2.eps>
 
-Output written on hcii.xdv (4 pages, 72656 bytes).
+Overfull \hbox (34.37572pt too wide) in paragraph at lines 139--142
+ \TU/lmr/m/it/10 Mechanical Arm:[] \TU/lmr/m/n/10 The mechanical arm we apply is the $\OML/cmm/m/it/10 Dobot Magician mechnical arm[]$
+ []
+
+File: images/3.png Graphic file (type bmp)
+<images/3.png>
+[3]
+File: images/4.png Graphic file (type bmp)
+<images/4.png>
+
+Overfull \hbox (2.19537pt too wide) in paragraph at lines 168--175
+[][][][][] [] [] [] [][][][][][] [] [][][] [] [][][][][][][] [] [][][][][][][][][][][][][]$\TU/lmr/m/n/10 ). Meanwhile, real time EEG sig-
+ []
+
+[4]
+File: images/5.jpg Graphic file (type bmp)
+<images/5.jpg>
+File: images/6.jpg Graphic file (type bmp)
+<images/6.jpg>
+
+Underfull \hbox (badness 1661) in paragraph at lines 213--213
+[]\TU/lmr/m/n/9 (b) the subject operating
+ []
+
+File: images/7.jpg Graphic file (type bmp)
+<images/7.jpg>
+File: images/8.jpeg Graphic file (type bmp)
+<images/8.jpeg>
+[5]
+File: images/9.eps Graphic file (type eps)
+<images/9.eps>
+File: images/10.eps Graphic file (type eps)
+<images/10.eps>
+File: images/11.eps Graphic file (type eps)
+<images/11.eps>
+File: images/12.eps Graphic file (type eps)
+<images/12.eps>
+File: images/13.eps Graphic file (type eps)
+<images/13.eps>
+ [6] [7] [8] (./hcii.aux) ) 
+Here is how much of TeX's memory you used:
+ 1694 strings out of 493010
+ 21035 string characters out of 6134663
+ 93209 words of memory out of 5000000
+ 5624 multiletter control sequences out of 15000+600000
+ 8529 words of font info for 45 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 28i,5n,26p,203b,333s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on hcii.xdv (8 pages, 129928 bytes).
