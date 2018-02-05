@@ -1,10 +1,12 @@
 \documentclass[runningheads,a4paper]{llncs}
 
 \usepackage{amssymb}
+\usepackage{amsmath}
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{url}
+\usepackage{bm}
 \urldef{\mailsa}\path|{qian_chen}@sjtu.edu.cn|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
@@ -223,12 +225,16 @@ cameras are showed in Fig.~\ref{fig:experiment:d}.
   \label{fig:experiment} %% label for entire figure
 \end{figure}
 
-\section{Data Process Method}
-Traditional pattern recognition process includes 4 steps: data preprocess,
-feature extraction, feature selection and classification design. In this paper,
-we use several classic methods in these field to explore their performance in
-our experiment data.
-\subsection{Data Preprocess}
+\section{Data Preprocess Methods}
+In data science field, data preprocess is the key procedure before any data analysis
+procedure. The quality of data preprocess directly affects the final accuracy of
+recognition. In EEG experiment, beacuse of the low signal noise rate (SNR) and
+various interference, filtering and amplifying EEG signal is a crucial step before
+EEG data analysis. And in our experiment, we need to do some label data preprocess
+to obtain more objective real time label of EEG data because of the use of sliding window which would
+be mentioned in Section 4 and the need of combining self-assessment with objective data.
+
+\subsection{EEG Data Preprocess}
 For one subject experiment, the raw data are drawed in Fig.~\ref{fig:wave:a}.
 And then according to the track mark and EEG signal mark, the EEG signal and
 the track were aligned in time. And we divided the entire EEG signal to
@@ -246,33 +252,175 @@ according to all 32 channels signal by min-max normlization.
 \begin{figure}
   \centering
   \subfigure[raw data]{
-    \label{fig:wave:a} %% label for first subfigure
+    \label{fig:wave:a} %% label for a subfigure
     \includegraphics[width=4in]{images/9}}
 
   \subfigure[easy mode raw data]{
-    \label{fig:wave:b} %% label for second subfigure
+    \label{fig:wave:b} %% label for b subfigure
     \includegraphics[width=4in]{images/10}}
 
   \subfigure[filtered data]{
-    \label{fig:wave:c} %% label for second subfigure
+    \label{fig:wave:c} %% label for c subfigure
     \includegraphics[width=4in]{images/11}}
 
   \subfigure[selected data]{
-    \label{fig:wave:d} %% label for second subfigure
+    \label{fig:wave:d} %% label for d subfigure
     \includegraphics[width=4in]{images/12}}
 
   \subfigure[normalized data]{
-    \label{fig:wave:e} %% label for second subfigure
+    \label{fig:wave:e} %% label for e subfigure
     \includegraphics[width=4in]{images/13}}
-
   \caption{Data preprocess wave charts}
   \label{fig:wave} %% label for entire figure
 \end{figure}
 
+\subsection{Label Data Preprocess}
+Label data includes three parts in total: the self-assesment of subjects, the difficulty
+level experimenters design and the performance the track reflects. The self-assesment
+is the subjective label data and the difficulty level and the performance are the
+objective data.
+
+For the self-assesment, after the entire experiment were finished,
+each subjects were asked to fill a table about their emotion state during
+operating different tasks. There were seven level the subjects could choose.
+"1" means the most positive emotion state, "4" means neutral emotion state and
+"7" means the most negative emotion state. The greater the number, the worse the
+emotion state. And then we used each score to weighted each task.
+
+For the the difficulty level experimenters desgin, we simply gave the scores of
+difficulty according to the workload and the time pressure. In easy task, we
+asked the subjects to touch three points without time constraint, which means that
+we assumed the most positive emotion state could be stimulated by this task.
+On the contrary, in hard task, we asked the subjects to touch five points with a ninety seconds
+constraint, which means that we assumed the most negtive emotion state could be stimulated by
+this task. We used "2.5", "4" and "5.5" to represent the emotion states different difficulty levels
+we assumed could stimulate.
+
+For the performace, we recorded the tip trajectory of mechnical arm. As showed
+in Fig.~\ref{fig:track}, in easy mode, the subjects were asked to touch orange
+point, purple point and pink point in order from a random start point. We assumed
+that the subjects would feel positive when they moved the mechnical arm smoothly,
+so we counted the numbers of direction change, in selected sliding window
+mentioned in Section 4, as the estimation of the emotion state of the subjects.
+
+\begin{figure}
+  \centering
+  \includegraphics[height=6cm]{images/14}
+  \caption{The tip trajectory of mechnical arm in easy mode}
+  \label{fig:track}
+\end{figure}
+
+We use the formula below to caculate the final label.
+
+\begin{equation}
+  L = \frac{1}{3}(L_{self-assessment}) + \frac{1}{3}(L_{difficulty-level}) +
+      \frac{1}{3}(L_{direction-change})
+\end{equation}
+where $L_{self-assessment}$ means the self-assessment score, $L_{difficulty-level}$
+ means the difficulty level score, $L_{direction-change} = 3\frac{N_{direction-change} - N_{min}}
+{N_{max} - N_{min}} - 1.5$ means the direction change score, among them,
+$N_{direction-change}$ means the number of direction changes,
+$N_{min}$ means the minium of $N_{direction-change}$ and
+$N_{max}$ means the maxium of $N_{direction-change}$.
+
+\section{Affective Recognition Methods}
+Traditional pattern recognition process includes 4 steps: data preprocess,
+feature extraction, feature selection and classification design. In this paper,
+we use several classic methods in feature extraction, feature selection
+and classification design procedure to explore their performance in
+our experiment data.
 
 \subsection{Multi-scale Feature Extration}
-The feature extraction procedure
+The multi-scale feature extraction procedure are divided in two steps:
+1) sliding window selection and
+2) feature extraction.
 
+\paragraph{\textbf{\emph{Sliding Window Selection}}}
+
+Because uncertain relation between time interval and emotion state change,
+we chose 2s, 4s, 6s, 8s, 10s as the length of sliding window and 0.2s
+as the length of stride to extract multi-scale features.
+
+\paragraph{\textbf{\emph{Feature Extraction}}}
+According to the paper\cite{Feature}, we chose 18 dimensions time domain features,
+which are statistical features,
+higher order crossings (HOC) features and fractal dimension feature, and 53
+dimensions frequency domain features, which are band power, bin power and
+the ratio of mean band powers $\beta/\alpha$.
+
+\emph{Time Domain Features}
+
+In this paper, we chose seven \emph{statistical\ features} to represent the
+raw EEG time series. There are:
+
+a) Mean: ${\mu}_{\bm{\eta}} = \frac{1}{T}\sum_{t=1}^T \bm{\eta}(t)$
+
+b) Power: $P_{\bm{\eta}} = \frac{1}{T}\sum_{-\infty}^{\infty} |{\bm{\eta}}(t)|^2 $
+
+c) Standard deviation: $\sigma_{\bm{\eta}} = \sqrt{ \frac{1}{T} \sum_{t=1}^{T-1} ({\bm{\eta}}(t) - {\mu}_{\bm{\eta}})^2 }$
+
+d) 1st difference: $\delta_{\bm{\eta}} = \frac{1}{T-1}\sum_{t=1}^{T-1}|{\bm{\eta}}(t+1) - {\bm{\eta}}(t)|$
+
+e) Normalized 1st difference: $ \bar{\delta_{\bm{\eta}}} = \frac{ \delta_{\bm{\eta}}}{\sigma_{\bm{\eta}}}$
+
+f) 2nd difference: $\gamma_{\bm{\eta}} = \frac{1}{T-2}\sum_{t=1}^{T-2}|{\bm{\eta}}(t+2) - {\bm{\eta}}(t)|$
+
+h) Normalized 2nd difference: $\bar{\gamma_{\bm{\eta}}} = \frac{\gamma_{\bm{\eta}}}{\sigma_{\bm{\eta}}}$
+
+To find more robust features and pattern of EEG, Petrantonakis and Hadjileontiadis proposed
+ higher order crosssings (HOC) features\cite{HOC}. Therefore we applied \emph{HOC} to represent the raw EEG time series.
+The higher order series could be caculated by the formula below:
+\begin{equation}
+    H_k\{{\bm{\eta}}(t)\} = \nabla^{k-1}{\bm{\eta}}(t)
+\end{equation}
+where $\nabla$ means ${\bm{\eta}}(t) - {\bm{\eta}}(t-1)$. Therefore, the features
+of HOC could be caculated by counting the sign changes or equation below:
+\begin{equation}
+  F_k = \sum_{t=1}^{T-k}\psi(H_k\{{\bm{\eta}}(t)\}H_k\{{\bm{\eta}}(t+1)\}), k = 1,2...10
+\end{equation}
+where $\psi(t)$ is a section function which is defined below:
+
+\begin{equation}
+   \psi(x)=
+   \begin{cases}
+   0 &\mbox{if x $\geq$ 0}\\
+   1 &\mbox{if  x $<$ 0}
+   \end{cases}
+\end{equation}
+
+The fractal dimention (FD) as a feature measuring the complexity is widely used.
+There are many mehtods computing the FD feature. In this paper, we chose to use
+the Higuchi algorithm\cite{FD} to caculate the FD feature. To compute the FD
+feature, the EEG series is rewritten as:
+\begin{equation}
+    \{{\bm{\eta}}(p), {\bm{\eta}}(p+q), {\bm{\eta}}(p+2q), ... , {\bm{\eta}}(q+[\frac{T-q}{q}]q)\},\ p = 1,2,...,q
+\end{equation}
+where [x] means the largest integer less than x. Then we could define the series $M_p(q)$ as below:
+\begin{equation}
+  M_p(q) = \frac{T-1}{[\frac{T-p}{q}]q^2}\sum_{k=1}^{[\frac{T-p}{q}]}|{\bm{\eta}}(p+kq) - {\bm{\eta}}(p+(k-1)q)|
+\end{equation}
+ Therefore we could further define the average:
+\begin{equation}
+  F(q) = \frac{1}{N_p}\sum_{p=1}^{N_p}M_p(q)
+\end{equation}
+where $N_p$ means the maxium of p.
+According to paper\cite{FD}, we knew that $F(p)$ is proportional to $p^{-F_{FD}}$
+(where $F_{FD}$ means the feature of FD). Therefore we could assumed:
+\begin{equation}
+   F(q) = r\cdot{p^{-F_{FD}}}
+\end{equation}
+when we log the equation, we could obtain:
+\begin{equation}
+  log(F(q)) = log(r) - {F_{FD}}log(p)
+\end{equation}
+Therefore we could obtain FD feature $F_{FD}$ by the slope of $log(F(q))$ to $log(p)$.
+
+\emph{Frequency Domain Features}
+
+For time series signal, spectrum analysis is an important method extracting features.
+Through short-time fourier transform (STFT)\cite{STFT}, which is a more robust method,
+we could get the power value as a function of time and frequecy: $P(t,f)$.
+A
 \subsection{Feature Selection}
 \subsection{Classification}
 
@@ -319,6 +467,17 @@ IEEE Transactions on Affective Computing, 2014, 5(3): 327-339.
 \bibitem{joystick} Features of The Extreme 3D Pro joystick,
 \url{https://www.logitechg.com/en-us/product/extreme-3d-pro-joystick#featuresAnchor}
 
+\bibitem{HOC} Petrantonakis P C, Hadjileontiadis L J.
+Emotion recognition from EEG using higher order crossings[J].
+IEEE Transactions on Information Technology in Biomedicine, 2010, 14(2): 186-197.
+
+\bibitem{FD} Liu Y, Sourina O.
+Real-time fractal-based valence level recognition from EEG[M]
+//Transactions on Computational Science XVIII. Springer, Berlin, Heidelberg, 2013: 101-120.
+
+\bibitem{STFT} Lin Y P, Wang C H, Jung T P, et al.
+ EEG-based emotion recognition in music listening[J].
+ IEEE Transactions on Biomedical Engineering, 2010, 57(7): 1798-1806.
 \end{thebibliography}
 
 
