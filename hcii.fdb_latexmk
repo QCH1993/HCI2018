@@ -46,11 +46,11 @@
   "hcii.dvi"
   "hcii.log"
   "hcii.aux"
-["xdvipdfmx"] 1517844014 "hcii.xdv" "hcii.pdf" "hcii" 1517844029
-  "hcii.xdv" 1517844014 187652 291bfec99d45b0c08ac06aa4f0263fc5 "xelatex"
+["xdvipdfmx"] 1517922535 "hcii.xdv" "hcii.pdf" "hcii" 1517922550
+  "hcii.xdv" 1517922535 237376 7b1d45ce3c11fd54be9d297d58222920 "xelatex"
   (generated)
   "hcii.pdf"
-["xelatex"] 1517844013 "hcii.tex" "hcii.xdv" "hcii" 1517844029
+["xelatex"] 1517922535 "hcii.tex" "hcii.xdv" "hcii" 1517922550
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1480098698 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1480098698 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -108,14 +108,15 @@
   "/usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf" 1494087824 32646 eadc4ca26cdbe7105ac7c593aa8c4f72 ""
   "/usr/local/texlive/2017/texmf-var/web2c/xetex/xelatex.fmt" 1513779851 3704921 ba99633f71dd478b00732c756bf70385 ""
   "/usr/local/texlive/2017/texmf.cnf" 1513779828 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "hcii.aux" 1517844014 4804 e468796d832bbeb567153d2b028c23f8 ""
-  "hcii.tex" 1517844013 22900 6a00bceb79cdbca33aef7bcdbaa4491d ""
+  "hcii.aux" 1517922535 5068 1502736a1d66011f3000dd4b618398ca ""
+  "hcii.tex" 1517922534 29735 01faf6268d67071a8347c4d421e25566 ""
   "images/1.png" 1517673120 211291 a7128418bf29edce9fe3c56fedc15713 ""
   "images/10.eps" 1517751501 241294 f91bc22094dc78834669eb19882442ae ""
   "images/11.eps" 1517751509 231282 68a170ef1c3fbd81059549a65aafba02 ""
   "images/12.eps" 1517751518 243637 453ef11367d54ea82fce90ca320c617d ""
   "images/13.eps" 1517751524 241428 4a38c3cf55497fdbc71dda2726b0e11e ""
-  "images/14.eps" 1517811288 80386 179a9b22450e796ad84ccdebf61ee164 ""
+  "images/14.eps" 1517896115 778570 0a43841c77aaa9b9ecdff9a26abfdfab ""
+  "images/15.png" 1517894576 47931 e0046eddf63fca239f017b8d9e0adfc2 ""
   "images/2.eps" 1517711308 38655 bcd9970d2ecc9fee9ad5ad2372feac1c ""
   "images/3.png" 1517713999 8013794 1b59cb96546ef802e06d674caa98e7df ""
   "images/4.png" 1517715151 26009 4a15bd9dcee6e37153a3b08c2f88567c ""
@@ -127,5 +128,5 @@
   "llncs.cls" 1516543216 42883 271b24d426a51b6c1c27d8179541db82 ""
   (generated)
   "hcii.xdv"
-  "hcii.log"
   "hcii.aux"
+  "hcii.log"

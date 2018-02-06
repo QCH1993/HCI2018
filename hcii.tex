@@ -351,7 +351,7 @@ the ratio of mean band powers $\beta/\alpha$.
 \emph{Time Domain Features}
 
 In this paper, we chose seven \emph{statistical\ features} to represent the
-raw EEG time series. There are:
+raw EEG time series. These are:
 
 a) Mean: ${\mu}_{\bm{\eta}} = \frac{1}{T}\sum_{t=1}^T \bm{\eta}(t)$
 
@@ -368,7 +368,7 @@ f) 2nd difference: $\gamma_{\bm{\eta}} = \frac{1}{T-2}\sum_{t=1}^{T-2}|{\bm{\eta
 h) Normalized 2nd difference: $\bar{\gamma_{\bm{\eta}}} = \frac{\gamma_{\bm{\eta}}}{\sigma_{\bm{\eta}}}$
 
 To find more robust features and pattern of EEG, Petrantonakis and Hadjileontiadis proposed
- higher order crosssings (HOC) features\cite{HOC}. Therefore we applied \emph{HOC} to represent the raw EEG time series.
+ \emph{higher order crosssings (HOC)} features\cite{HOC}. Therefore we applied HOC to represent the raw EEG time series.
 The higher order series could be caculated by the formula below:
 \begin{equation}
     H_k\{{\bm{\eta}}(t)\} = \nabla^{k-1}{\bm{\eta}}(t)
@@ -388,7 +388,7 @@ where $\psi(t)$ is a section function which is defined below:
    \end{cases}
 \end{equation}
 
-The fractal dimention (FD) as a feature measuring the complexity is widely used.
+The \emph{fractal dimention (FD)} as a feature measuring the complexity is widely used.
 There are many mehtods computing the FD feature. In this paper, we chose to use
 the Higuchi algorithm\cite{FD} to caculate the FD feature. To compute the FD
 feature, the EEG series is rewritten as:
@@ -419,10 +419,142 @@ Therefore we could obtain FD feature $F_{FD}$ by the slope of $log(F(q))$ to $lo
 
 For time series signal, spectrum analysis is an important method extracting features.
 Through short-time fourier transform (STFT)\cite{STFT}, which is a more robust method,
-we could get the power value as a function of time and frequecy: $P(t,f)$.
-A
+we could get the power value as a function of time and frequecy: $p(t,f)$. Further,
+the relation of the power and the frequecy could be written as below:
+
+\begin{equation}
+    P(f) = \sqrt{\sum_{t=0}^{T}[p(t,f)]^2}
+\end{equation}
+
+As we konw, effective EEG signals exists in low frequency band.
+Further, this valid low frequecy band could be divided to five smaller parts:
+$\delta$ (1-4 Hz) band, $\theta$ (4-8 Hz) band, $\alpha$ (8-12 Hz) band,
+$\beta$ (12-30 Hz) band, $\gamma$ (30-64 Hz) band.
+Therefore, for each band on [$f_a$,$f_b$],
+\emph{STFT band power} could be caculated by the formula below. Additionally,
+the ratio of mean band powers $\frac{\beta}{\alpha}$ was computed.
+
+a) Mean: $\mu_P = \frac{1}{f_b-f_a}\sum_{f=f_a}^{f_b}P(f)$
+
+b) Minium: $P_{max} = max(P(f)), f\in[f_a,f_b]$
+
+c) Maxium: $P_{min} = min(P(f)), f\in[f_a,f_b]$
+
+d) Varience: $ var(P) = \frac{1}{f_b-f_a}\sum_{f=f_a}^{f_b}|P(f)|^2$
+
+Similarly, we could divide the frequency band in a higher resolution to obtain
+\emph{STFT bin power} features. We divided the 1-64 Hz band into 32 subband, which
+means 32 $\Delta f = 2Hz$ bands are extracted for further processing.
+And then, for each $\Delta f$ band, we could caculate the STFT bin power
+feature by the formula above.
+
+As showed in Fig.~\ref{longfeature},
+We concatenate the time domain features and the frequency domain features as
+the representation of original raw data. Therefore, the features number of one channel of
+one sample is 71.
+
+\begin{figure}
+  \centering
+  \includegraphics[height=2.5cm]{images/15}
+  \caption{Feature vector composition}
+  \label{longfeature}
+\end{figure}
+
 \subsection{Feature Selection}
+\emph{Principal component analysis (PCA)}, proposed by Pearson\cite{PCA},
+is a effective and classic method to reduce dimensions of origianl
+matrix through keeping the lower order principal componets. Therefore，we use PCA to
+select the original features.
+
+After the feature extraction steps, we could concatenate 32 channels feature to
+a long features vector and use all samples to costitute a feature matrix
+$\vec{M} = (\vec{\phi_1}, \vec{\phi_2},..., \vec{\phi_N})$, where $\phi_i$ means
+one sample features vector, N means the number of samples.
+
+Then we use the samples to estimate the mean and the convariance matrix:
+\begin{equation}
+    \bar{\vec{\phi} }= \frac{1}{N}\sum_{i=1}^{N}\vec{\phi_i}
+\end{equation}
+
+\begin{equation}
+  \vec{\Sigma} = \frac{1}{N}\sum_{i=1}^{N}(\vec{\phi_i}-\bar{\vec{\phi}})(\vec{\phi_i}-\bar{\vec{\phi}})^T = \frac{1}{N}\vec{X}{\vec{X}}^T
+\end{equation}
+
+Then we could caculate the eigenvectors ($\vec{\mu_i}$) and the eigenvalue ($\lambda_i$)
+ of $\Sigma$. The value $\lambda_i$ means the importance of the corresponding
+ eigenvector $\vec{\mu_i}$. We sorted these eigenvalues in descending order to obtain
+the descending eigenvalue series: $\lambda_1^\prime$, $\lambda_2^\prime$,...,
+$\lambda_i^\prime$,..., $\lambda_L^\prime$, where L is the number of features.
+Correspondingly, the egigenvectors could be rearranged: $\vec{\mu_1^\prime}$,
+$\vec{\mu_2^\prime}$,..., $\vec{\mu_i^\prime}$,..., $\vec{\mu_L^\prime}$.
+Then we define the information integrity $I$ by the formula below:
+
+\begin{equation}
+  I = \frac{\sum_{i=1}^{k}\lambda_i^\prime}{\sum_{i=1}^{L}\lambda_i^\prime}
+\end{equation}
+
+In this paper, we chose
+\begin{equation}
+  K = \mathop{\arg\max}_{k} \ I(k)>0.99
+\end{equation}
+Then K is the feature dimension of feature matrix after dimensionality reduction.
+And the mapping matrix is $M_{PCA} = (\vec{\mu_1^\prime},
+\vec{\mu_2^\prime},..., \vec{\mu_K^\prime})$
+
 \subsection{Classification}
+\emph{Support vector machine (SVM)} is a effective classification proposed
+by $Cortes\ and\ Vapnik^{\cite{SVM}}$. Because the advantages of SVM in non-linear
+and high-dimensional pattern recognition, we applied it in our experiment as
+the classification.
+
+When we classify data, each sample data is composed of a feature vector and a
+label value: $D_i = (\vec{x_i}, y_i)$, where $\vec{x_i}$ is the feature vector
+in high dimension, $y_i$ is the category the sample belongs. In particular, the
+classification problem of two category is taken as an example, and the multi-classification
+problem could be solved as the combination of multiple two classification problems.
+Specially, in two classification problem, we define the distance between one sample
+and a hyperplane is $\eta_i$, and $\eta_i = y_i(\vec{\omega x_i + b})$. And to normalize the distance,
+$\vec{\omega}$ and $b$ are replaced by $\frac{\vec{\omega}}{\|\vec{\omega\|}}$
+and $\frac{b}{\|\vec{\omega\|}}$. The normalized distance could be rewritten
+as
+\begin{equation}
+  \label{delta}
+  \delta_i = \frac{|g(\vec{x_i})}{\|\vec{\omega}\|}
+\end{equation}
+where $g(\vec{x_i})=\vec{\omega}\vec{x_i}+b$.
+Because the realtion between $\delta$ and misclassification number N is
+\begin{equation}
+  N \leq {(\frac{2R}{\delta})}^2
+\end{equation}
+where $R=max\|\vec{x_i}\|, i=1,2,...,n$, the larger the distance $\delta$ is, the
+smaller the N is. Therefore, the optimizing equation is
+\begin{equation}
+  \begin{split}
+  &\max \,\, \delta\\
+  &s.t.\quad y_i(\vec{\omega}\vec{x_i}+b)-1 \geq 0,i=1,2,...,n
+ \end{split}
+\end{equation}
+Further, according to equation~\ref{delta}, the optimizing target could be
+rewritten as below:
+\begin{equation}
+  \begin{split}
+  &\min \,\, \frac{1}{2}{\|\vec{\omega}\|}^2\\
+  &s.t.\quad y_i(\vec{\omega}\vec{x_i}+b)-1 \geq 0,i=1,2,...,n
+ \end{split}
+\end{equation}
+Because $\vec{\omega}$ determined by sample data, $\vec{\omega}$ could be assumed as:
+\begin{equation}
+  \vec{\omega} = \sum_{i=1}^{n}a_iy_i\vec{x_i}^T
+\end{equation}
+$a_i$ would be uneaual to zero only when the sample is on the closest hyperplanes.
+In other word, hyperplanes are supported by the sample points which are close to
+these hyperplanes. Therefore, discriminant function could be written as:
+\begin{equation}
+  g(\vec{x}) = \vec{\omega}\vec{x}+b=\sum_{i=1}^{n}a_iy_i\vec{x_i}^T\vec{x}+b
+\end{equation}
+Since the samples on hyperplanes are known, b could be caculated by $y_i(\vec{\omega}\vec{x_i}+b)-1=0$
+When test sample $\vec{x}_{test}$ need to be classify, the value of $g(\vec{x}_{test})$
+decides the category $\vec{x}_{test}$ belongs.
 
 \section{Results}
 
@@ -478,6 +610,14 @@ Real-time fractal-based valence level recognition from EEG[M]
 \bibitem{STFT} Lin Y P, Wang C H, Jung T P, et al.
  EEG-based emotion recognition in music listening[J].
  IEEE Transactions on Biomedical Engineering, 2010, 57(7): 1798-1806.
+
+ \bibitem{PCA} Pearson K. LIII.
+ On lines and planes of closest fit to systems of points in space[J].
+ The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 1901, 2(11): 559-572.
+
+\bibitem{SVM} Cortes C, Vapnik V.
+Support-vector networks[J].
+Machine learning, 1995, 20(3): 273-297.
 \end{thebibliography}
 
 
