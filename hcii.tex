@@ -132,7 +132,7 @@ The sampling rate is 500Hz which is sufficient for obtaining EEG signal.
 % \end{figure}
 % \begin{figure}
     \centering
-    \includegraphics[height=8cm]{images/2}
+    \includegraphics[height=6cm]{images/2}
     \caption{32 dry electrodes sensor location}
     \label{fig:sensorloc}
 \end{figure}
@@ -144,7 +144,7 @@ the need of users and the control precision (0.2mm) is adequate for our experime
 
 \begin{figure}
     \centering
-    \includegraphics[height=4cm]{images/3}
+    \includegraphics[height=3cm]{images/3}
     \caption{Dobot Magician mechanical arm}
     \label{fig:dobot}
 \end{figure}
@@ -170,8 +170,8 @@ which are left-right direction, front-behind direction and left-right rotation.
 In our experiment, we use Robot Operating System (ROS) to receive the control
 signal from joystick, release the control signal to mechnical arm, recieve the
 position information of the end point of the mechnical arm and record the track
-information with real time mark point in a sampling rate of 10Hz
-(code url: \url{https://github.com/QCH1993/DobotMagician}). Meanwhile,
+information with real time mark point in a sampling rate of
+10Hz.\footnote{Code url:\url{https://github.com/QCH1993/DobotMagician}} Meanwhile,
 real time EEG signal are recorded with mark information which could be used in
 subsequent time correcting process.
 
@@ -179,6 +179,27 @@ subsequent time correcting process.
 Five healthy participants (two females, three males), aged between 23 and 25,
 participated in the experiment. Before all experiments, all participants were
 asked to have adequate sleepness.
+
+\begin{figure}
+  \centering
+  \subfigure[overview]{
+    \label{fig:experiment:a} %% label for first subfigure
+    \includegraphics[width=1.5in]{images/5}}
+  \hspace{0.5in}
+  \subfigure[the subject operating joystick]{
+    \label{fig:experiment:b} %% label for second subfigure
+    \includegraphics[width=1.5in]{images/6}}
+
+  \subfigure[the mechnical arm operation platform]{
+    \label{fig:experiment:c} %% label for second subfigure
+    \includegraphics[width=1.5in]{images/7}}
+  \hspace{0.5in}
+  \subfigure[the screen showing camera information]{
+    \label{fig:experiment:d} %% label for second subfigure
+    \includegraphics[width=1.5in]{images/8}}
+  \caption{The experiment environment}
+  \label{fig:experiment} %% label for entire figure
+\end{figure}
 
 In our experiment, firstly, participants were asked to read the experiment
 procedures and notes and the experimenter would read out the procedures and notes
@@ -203,27 +224,6 @@ all the information helping the subjects to move the mechnical arm was from thre
 camera set around the mechnical arm and on the end point of the mechnical arm
 (see in Fig.~\ref{fig:experiment:c}). The screen interface presenting the information from
 cameras are showed in Fig.~\ref{fig:experiment:d}.
-
-\begin{figure}
-  \centering
-  \subfigure[overview]{
-    \label{fig:experiment:a} %% label for first subfigure
-    \includegraphics[width=1.5in]{images/5}}
-  \hspace{0.5in}
-  \subfigure[the subject operating joystick]{
-    \label{fig:experiment:b} %% label for second subfigure
-    \includegraphics[width=1.5in]{images/6}}
-
-  \subfigure[the mechnical arm operation platform]{
-    \label{fig:experiment:c} %% label for second subfigure
-    \includegraphics[width=1.5in]{images/7}}
-  \hspace{0.5in}
-  \subfigure[the screen showing camera information]{
-    \label{fig:experiment:d} %% label for second subfigure
-    \includegraphics[width=1.5in]{images/8}}
-  \caption{The experiment environment}
-  \label{fig:experiment} %% label for entire figure
-\end{figure}
 
 \section{Data Preprocess Methods}
 In data science field, data preprocess is the key procedure before any data analysis
@@ -253,28 +253,28 @@ according to all 32 channels signal by min-max normlization.
   \centering
   \subfigure[raw data]{
     \label{fig:wave:a} %% label for a subfigure
-    \includegraphics[width=4in]{images/9}}
-
+    \includegraphics[width=12cm]{images/9}}
+ \hspace{1cm}
   \subfigure[easy mode raw data]{
     \label{fig:wave:b} %% label for b subfigure
-    \includegraphics[width=4in]{images/10}}
+    \includegraphics[width=12cm]{images/10}}
 
   \subfigure[filtered data]{
     \label{fig:wave:c} %% label for c subfigure
-    \includegraphics[width=4in]{images/11}}
-
+    \includegraphics[width=12cm]{images/11}}
+ \hspace{1cm}
   \subfigure[selected data]{
     \label{fig:wave:d} %% label for d subfigure
-    \includegraphics[width=4in]{images/12}}
+    \includegraphics[width=12cm]{images/12}}
 
   \subfigure[normalized data]{
     \label{fig:wave:e} %% label for e subfigure
-    \includegraphics[width=4in]{images/13}}
+    \includegraphics[width=12cm]{images/13}}
   \caption{Data preprocess wave charts}
   \label{fig:wave} %% label for entire figure
 \end{figure}
 
-\subsection{Label Data Preprocess}
+\subsection{Real Time Label Data Synthesis}
 Label data includes three parts in total: the self-assesment of subjects, the difficulty
 level experimenters design and the performance the track reflects. The self-assesment
 is the subjective label data and the difficulty level and the performance are the
@@ -296,7 +296,7 @@ constraint, which means that we assumed the most negtive emotion state could be 
 this task. We used "2.5", "4" and "5.5" to represent the emotion states different difficulty levels
 we assumed could stimulate.
 
-For the performace, we recorded the tip trajectory of mechnical arm. As showed
+For the performance, we recorded the tip trajectory of mechnical arm. As showed
 in Fig.~\ref{fig:track}, in easy mode, the subjects were asked to touch orange
 point, purple point and pink point in order from a random start point. We assumed
 that the subjects would feel positive when they moved the mechnical arm smoothly,
@@ -313,10 +313,11 @@ mentioned in Section 4, as the estimation of the emotion state of the subjects.
 We use the formula below to caculate the final label.
 
 \begin{equation}
-  L = \frac{1}{3}(L_{self-assessment}) + \frac{1}{3}(L_{difficulty-level}) +
-      \frac{1}{3}(L_{direction-change})
+  L = [\frac{1}{2}L_{self-assessment} + \frac{1}{2}(L_{difficulty-level} +
+      L_{direction-change}) + \frac{1}{2}]
 \end{equation}
-where $L_{self-assessment}$ means the self-assessment score, $L_{difficulty-level}$
+where [x] means the largest integer not exceeding x,
+$L_{self-assessment}$ means the self-assessment score, $L_{difficulty-level}$
  means the difficulty level score, $L_{direction-change} = 3\frac{N_{direction-change} - N_{min}}
 {N_{max} - N_{min}} - 1.5$ means the direction change score, among them,
 $N_{direction-change}$ means the number of direction changes,
@@ -378,7 +379,7 @@ of HOC could be caculated by counting the sign changes or equation below:
 \begin{equation}
   F_k = \sum_{t=1}^{T-k}\psi(H_k\{{\bm{\eta}}(t)\}H_k\{{\bm{\eta}}(t+1)\}), k = 1,2...10
 \end{equation}
-where $\psi(t)$ is a section function which is defined below:
+where $\psi(x)$ is a section function which is defined below:
 
 \begin{equation}
    \psi(x)=
@@ -519,7 +520,7 @@ and $\frac{b}{\|\vec{\omega\|}}$. The normalized distance could be rewritten
 as
 \begin{equation}
   \label{delta}
-  \delta_i = \frac{|g(\vec{x_i})}{\|\vec{\omega}\|}
+  \delta_i = \frac{|g(\vec{x_i})|}{\|\vec{\omega}\|}
 \end{equation}
 where $g(\vec{x_i})=\vec{\omega}\vec{x_i}+b$.
 Because the realtion between $\delta$ and misclassification number N is
@@ -547,19 +548,62 @@ Because $\vec{\omega}$ determined by sample data, $\vec{\omega}$ could be assume
   \vec{\omega} = \sum_{i=1}^{n}a_iy_i\vec{x_i}^T
 \end{equation}
 $a_i$ would be uneaual to zero only when the sample is on the closest hyperplanes.
-In other word, hyperplanes are supported by the sample points which are close to
+In other word, hyperplanes are supportedfrac{1}{2} by the sample points which are close to
 these hyperplanes. Therefore, discriminant function could be written as:
 \begin{equation}
   g(\vec{x}) = \vec{\omega}\vec{x}+b=\sum_{i=1}^{n}a_iy_i\vec{x_i}^T\vec{x}+b
 \end{equation}
-Since the samples on hyperplanes are known, b could be caculated by $y_i(\vec{\omega}\vec{x_i}+b)-1=0$
-When test sample $\vec{x}_{test}$ need to be classify, the value of $g(\vec{x}_{test})$
+Since the samples on hyperplanes are known, b could be caculated by
+$y_i(\vec{\omega}\vec{x_i}+b)-1=0$ When test sample $\vec{x}_{test}$
+need to be classify, the value of $g(\vec{x}_{test})$
 decides the category $\vec{x}_{test}$ belongs.
 
-\section{Results}
+\section{Results and Discussion}
+In our recognition experiment, we applied the ten-folder cross-validation method
+to test the accuracy robustness of the recognition algorithm. We randomly selected
+10\% original data as the test data, and chose the rest as the train data, and this
+process has been done 10 times for each specific parameter pair to eliminate the
+accidental errors.
+\subsection{Real Time Label Data Synthesis }
+As showed in Fig.~\ref{fig:label}, an example of the self-assessment score,
+the difficulty level score and the performance score were depicted.
+The trend of the difficulty level score and the self-assessment is basically
+the same.
 
-\section{Discussion}
+After adding the performance score, as we assumed that the emotion state
+is unstable even in the same task, there are some real time influction which
+meets the need for obtaining real time label data to study the influence for recognition
+accuracy when the multi-scale sliding window were used.
 
+\begin{figure}
+  \includegraphics[width=12cm]{images/16}
+  \caption{Real time label data synthesis}
+  \label{fig:label}
+\end{figure}
+
+\subsection{Multi-scale Sliding Window}
+In our recognition experiment, multi-scale sliding windows were applied into
+extract features. Because the detecting window of the performance feature extraction
+in real time label data synthesis is 2s long, the scale of the sliding window
+should be longer than 2s. Therefore, we chose every 2s time interval from 4s to
+30s to explore the relation between the accuracy and the length of the sliding
+window. As showed in Fig.~\ref{fig:sliding},
+
+\begin{figure}
+  \centering
+  \includegraphics[width=18cm,angle=90]{17}
+  \caption{Recognition accuracy about multi-scale sliding window and feature selection}
+  \label{fig:sliding}
+\end{figure}
+
+\begin{tabular}{ccc}
+  \toprule
+  Length& 4s& 性别\\
+  \midrule
+  Ch'en Meng& 001& Male\\
+  Sarah Brightman& 002& Female\\
+  \bottomrule
+  \end{tabular}
 \section{Conclusion}
 
 
