@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.12.20)  7 FEB 2018 23:21
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.12.20)  8 FEB 2018 19:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -273,22 +273,18 @@ File: images/1.png Graphic file (type bmp)
 <images/1.png>
 File: images/2.eps Graphic file (type eps)
 <images/2.eps>
-
-Overfull \hbox (34.37572pt too wide) in paragraph at lines 141--144
- \TU/lmr/m/it/10 Mechanical Arm:[] \TU/lmr/m/n/10 The mechanical arm we apply is the $\OML/cmm/m/it/10 Dobot Magician mechnical arm[]$
- []
-
+ [3]
 File: images/3.png Graphic file (type bmp)
 <images/3.png>
-[3]
 File: images/4.png Graphic file (type bmp)
 <images/4.png>
+ [4]
 File: images/5.jpg Graphic file (type bmp)
 <images/5.jpg>
 File: images/6.jpg Graphic file (type bmp)
 <images/6.jpg>
 
-Underfull \hbox (badness 1661) in paragraph at lines 191--191
+Underfull \hbox (badness 1661) in paragraph at lines 198--198
 []\TU/lmr/m/n/9 (b) the subject operating
  []
 
@@ -296,10 +292,7 @@ File: images/7.jpg Graphic file (type bmp)
 <images/7.jpg>
 File: images/8.jpeg Graphic file (type bmp)
 <images/8.jpeg>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4] [5]
+[5]
 File: images/9.eps Graphic file (type eps)
 <images/9.eps>
 File: images/10.eps Graphic file (type eps)
@@ -313,39 +306,37 @@ File: images/13.eps Graphic file (type eps)
  [6] [7]
 File: images/14.eps Graphic file (type eps)
 <images/14.eps>
-
-Overfull \hbox (33.85194pt too wide) in paragraph at lines 318--326
-\TU/lmr/m/n/10 self-assessment score, $\OML/cmm/m/it/10 L[]$ \TU/lmr/m/n/10 means the difficulty level score, $\OML/cmm/m/it/10 L[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (3.39662pt too wide) in paragraph at lines 318--326
+ [8]
+Overfull \hbox (3.39662pt too wide) in paragraph at lines 333--338
 \OML/cmm/m/it/10 N[]$ \TU/lmr/m/n/10 means the number of direction changes, $\OML/cmm/m/it/10 N[]$ \TU/lmr/m/n/10 means the minium
  []
 
-[8] [9] [10]
+[9] [10]
 File: images/15.png Graphic file (type bmp)
 <images/15.png>
 Missing character: There is no ， in font [lmroman10-regular]:mapping=tex-text;!
  [11]
-Overfull \hbox (53.77354pt too wide) in paragraph at lines 506--510
-\TU/lmr/m/it/10 Support vector machine (SVM) \TU/lmr/m/n/10 is a effective classification proposed by $\OML/cmm/m/it/10 Cortes and Vapnik[]$\TU/lmr/m/n/10 .
+Overfull \hbox (7.08545pt too wide) in paragraph at lines 538--542
+\TU/lmr/m/n/10 and Vapnik$[]$. Because the advantages of SVM in non-linear and high-dimensional
  []
 
 [12]
 File: images/16.eps Graphic file (type eps)
 <images/16.eps>
- [13]
 File: 17.eps Graphic file (type eps)
 <17.eps>
- [14] [15] (./hcii.aux) ) 
+
+
+LaTeX Warning: Float too large for page by 99.26935pt on input line 622.
+
+[13] [14] [15] [16] (./hcii.aux) ) 
 Here is how much of TeX's memory you used:
  2418 strings out of 493010
  29352 string characters out of 6134663
- 104692 words of memory out of 5000000
+ 103692 words of memory out of 5000000
  6306 multiletter control sequences out of 15000+600000
  13148 words of font info for 62 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  28i,20n,26p,224b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on hcii.xdv (15 pages, 253816 bytes).
+Output written on hcii.xdv (16 pages, 284468 bytes).

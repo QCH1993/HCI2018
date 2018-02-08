@@ -7,7 +7,7 @@
 \usepackage{subfigure}
 \usepackage{url}
 \usepackage{bm}
-\urldef{\mailsa}\path|{qian_chen}@sjtu.edu.cn|
+\urldef{\mailsa}\path|qian_chen@sjtu.edu.cn|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
 
@@ -18,9 +18,9 @@
 \title{ Affective Recognition Using EEG Signal in Human-robot Interaction }
 \titlerunning{ Affective Recognition Using EEG Signal in Human-robot Interaction}
 
-\author{Chen Qian\and Tingting Hou\and Shan Fu }
+\author{Chen Qian\and Tingting Hou\and Yanyu Lu \and Shan Fu }
 
-\authorrunning{ Affective Recognition Using EEG Signal in Human-robot Interaction}
+\authorrunning{ C.Qian et al.}
 \institute{School of Electronic Information and Electrical Engineering, Shanghai Jiao Tong University,
 Shanghai, 200240, P.R. China\\
 \mailsa }
@@ -28,9 +28,20 @@ Shanghai, 200240, P.R. China\\
 \maketitle
 %Abstract
 \begin{abstract}
-TODO : this part is waiting to be rewritten.
-\keywords{Affective Computing; Arm-Robot Operation; Time Domain Features;
-Domain Feat}
+Human-robot interaction is a crucial field in human factor field and mechnical
+arm operation is a widely used form in human-robot interaction.
+However, the mistaken operations caused by the emotion influction
+of operators are still one of the dominant reasons causing accidents. Because of
+the close link between emotion state and human error, in this paper, we analyzed
+the EEG signal of five subjects operating mechanical arm and the track record of
+the mechnical arm movement. A combination label model including the subjective part and
+objective part are proposed to reflect the real time emotion state influction. Addtionally,
+in subsequent recognition experiment, the results indicate that the emotion is
+a state of mind that requires a relatively longer period of time to be effectively represented
+and the frequency domain features are significantly more important than time domain features
+in emotion recognition process using EEG signal.
+\keywords{Affective recognition, Mechanical arm, Time domain features,
+Frequency domain features, Multi-scale sliding window}
 \end{abstract}
 
 \section{Introduction}
@@ -68,22 +79,20 @@ is also crucial. Almost all research in Affective Computing field use the self-a
 scores to estimate the true cognitive state of the subjects. However, even the subjects
 themselves could hardly to retell the exact emotion state in the mechanical arm operation
 and using one single scores to estimate the cognitive state during the entire operation process
- is obiviously not reasonable in detail. So this paper proposes to use objective and real time
- indexes to represent the cognitive state of the subjects. In this paper, we record the track
- of the end point of the mechanical arm and extract the features of the track to represent
- the fluctuation of the cognitive state of the subjects. Meanwhile, we assume that the workload
-  and the time pressure could stimulate the emotion change of the subjects, so we give a
-  basic score, which reflects the emotion state the subjects should be, and add the weighted
-  features scores to the basic score to reflect the fluctuation of the emotion state.
-
+is obiviously not reasonable in detail. So this paper proposes to use objective and real time
+indexes to represent the cognitive state of the subjects. In this paper, we record the track
+of the end point of the mechanical arm and extract the features of the track to represent
+the fluctuation of the cognitive state of the subjects. Meanwhile, we assume that the workload
+and the time pressure could stimulate the emotion change of the subjects, so we give a
+basic score, which reflects the emotion state the subjects should be, and add the weighted
+track features scores to the basic score to reflect the fluctuation of the emotion state.
 
 In our experiment, we designed three levels of operating tasks in different difficulty to
-  stimulate the emotion state change. And the level of difficulty is determined by the
-  workload and the time pressure. To eliminate the influence of unfamilarity, one minute
-  of free exploration is added before these three tasks and to eliminate the interaction
-  of different tasks, a 30 seconds reset time interval is added between the different
-  tasks.
-
+stimulate the emotion state change. And the level of difficulty is determined by the
+workload and the time pressure. To eliminate the influence of unfamilarity, one minute
+of free exploration is added before these three tasks and to eliminate the interaction
+of different tasks, a 30 seconds reset time interval is added between the different
+tasks.
 
 During the data process part, because of the low signal-to-noise ratio (SNR),
 the disturbance of EMG signal and the electromagnetic interference, the raw data
@@ -95,21 +104,18 @@ data in single sliding window as one sample.
 The feature extraction methods are detailed summarized in papaer\cite{Feature}, we choose
 three time domain features and one frequency feature to represent the raw data according
 to the value of the weighted relative occurrence. And at the feature selection process,
-we apply Principal Component Analysis (PCA) and Linear Discriminant Analysis (LDA) to
+we apply Principal Component Analysis (PCA) to
 select the extracted features above. And at the classification design process, we apply
-Support Vector Machine (SVM), which is a effective classification discriminator,
+Support Vector Machine (SVM), which is an effective classification discriminator,
 to predict the emotion state.
 
-Here is the remainder organization of this paper: Section 2 introduce the
+Here is the reminder organization of this paper: Section 2 introduce the
 apparatus used in the experiment and the detail experiment protocol. Section 3
-describes the data preprocess procedure, feature extraction, feature selection
-classification design methods. Section 4 focus on showing the data process
-results. Section 5 discusses the results. Section 6 gives the conclusion of
-our experiment.
-%mistake, Emotion is an important psychological process which could be induced by
-%conscious and unconscious brain activities. This psychological process could
-%reflect the cognitive state of , such as emotional images, musics, and video clips.
-%Actually, many researching works have been done
+describes the data preprocess procedure, including EEG data preprocess and
+real time label data synthesis. Section 4 focuses on affective recognition methods,
+including multi-scale feature extraction, feature selection and
+classification design. Section 5 focus on the results of the experiment and
+the analysis of these results. Section 6 summarizes the conclusion of this paper.
 
 \section{Experiment Setup}
 \subsection{Apparatus}
@@ -118,27 +124,28 @@ Mechanical Arm and Joystick. And there are 3 personal computers for communicatin
 with EEG equipment, controling movement of mechanical arm through joystick and
 showing the end point of the mechanical arm.
 \paragraph{EEG Signal Acquisition Equipment:}
-The EEG Signal Acquisition Equipment we apply is the $Cognionics\ HD-72\ Dry\ EEG
-\ Headset^{\cite{cognionics}}$ (see in Fig.~\ref{fig:EEGequipment}).
-Considering the difficulty of wearing EEG equipment and the comfort of the subjects,
-we choose 32 dry electrodes, according to the international 10-20 system,
-to obtain the EEG signal, which are showed in Fig.~\ref{fig:sensorloc}.
-The sampling rate is 500Hz which is sufficient for obtaining EEG signal.
+The EEG Signal Acquisition Equipment we apply is the Cognionics HD-72 Dry EEG
+Headset$^{\cite{cognionics}}$ (see in Fig.~\ref{fig:EEGequipment}).
 \begin{figure}
-    \centering
-    \includegraphics[height=4cm]{images/1}
-    \caption{Cognionics HD-72 Dry EEG Headset}
-    \label{fig:EEGequipment}
-% \end{figure}
-% \begin{figure}
-    \centering
-    \includegraphics[height=6cm]{images/2}
-    \caption{32 dry electrodes sensor location}
-    \label{fig:sensorloc}
+     \centering
+     \includegraphics[height=3cm]{images/1}
+     \caption{Cognionics HD-72 Dry EEG Headset}
+     \label{fig:EEGequipment}
+ % \end{figure}
+ %  \begin{figure}
+     \centering
+     \includegraphics[height=6.5cm]{images/2}
+     \caption{32 dry electrodes sensor location}
+     \label{fig:sensorloc}
 \end{figure}
 
+Considering the difficulty of wearing EEG equipment and the comfort of the subjects,
+we choose 32 dry electrodes, according to the international 10-20 system,
+to obtain the EEG signal, which are showed in Fig.~\ref{fig:sensorloc}. The
+sampling rate is 500Hz which is sufficient for obtaining EEG signal.
+
 \paragraph{Mechanical Arm:}
-The mechanical arm we apply is the $Dobot\ Magician\ mechnical\ arm^{\cite{dobot}}$
+The mechanical arm we apply is the Dobot Magician mechnical arm$^{\cite{dobot}}$
 (see in Fig.~\ref{fig:dobot}), because it supports reprogramming according to
 the need of users and the control precision (0.2mm) is adequate for our experiment.
 
@@ -150,8 +157,8 @@ the need of users and the control precision (0.2mm) is adequate for our experime
 \end{figure}
 
 \paragraph{Joystick:}
-The joystick we use is the flying joystick named $Extreme\ 3D\ Pro^{\cite{joystick}}$
-produced by Logitech (see in Fig.~\ref{fig:joystick}).
+The joystick we use is the flying joystick named Extreme 3D
+Pro$^{\cite{joystick}}$ produced by Logitech (see in Fig.~\ref{fig:joystick}).
 The perfect ergonomic design with a custom twist-handle rudder relies
 its one-handed control resulting in a smaller device footprint.
 There are six programmable buttons on the base.
@@ -162,7 +169,7 @@ which are left-right direction, front-behind direction and left-right rotation.
 
 \begin{figure}
     \centering
-    \includegraphics[height=4cm]{images/4}
+    \includegraphics[height=3cm]{images/4}
     \caption{Logitech Extreme 3D Pro joystick}
     \label{fig:joystick}
 \end{figure}
@@ -191,11 +198,11 @@ asked to have adequate sleepness.
     \includegraphics[width=1.5in]{images/6}}
 
   \subfigure[the mechnical arm operation platform]{
-    \label{fig:experiment:c} %% label for second subfigure
+    \label{fig:experiment:c}
     \includegraphics[width=1.5in]{images/7}}
   \hspace{0.5in}
   \subfigure[the screen showing camera information]{
-    \label{fig:experiment:d} %% label for second subfigure
+    \label{fig:experiment:d}
     \includegraphics[width=1.5in]{images/8}}
   \caption{The experiment environment}
   \label{fig:experiment} %% label for entire figure
@@ -254,7 +261,7 @@ according to all 32 channels signal by min-max normlization.
   \subfigure[raw data]{
     \label{fig:wave:a} %% label for a subfigure
     \includegraphics[width=12cm]{images/9}}
- \hspace{1cm}
+
   \subfigure[easy mode raw data]{
     \label{fig:wave:b} %% label for b subfigure
     \includegraphics[width=12cm]{images/10}}
@@ -262,7 +269,7 @@ according to all 32 channels signal by min-max normlization.
   \subfigure[filtered data]{
     \label{fig:wave:c} %% label for c subfigure
     \includegraphics[width=12cm]{images/11}}
- \hspace{1cm}
+
   \subfigure[selected data]{
     \label{fig:wave:d} %% label for d subfigure
     \includegraphics[width=12cm]{images/12}}
@@ -275,12 +282,12 @@ according to all 32 channels signal by min-max normlization.
 \end{figure}
 
 \subsection{Real Time Label Data Synthesis}
-Label data includes three parts in total: the self-assesment of subjects, the difficulty
-level experimenters design and the performance the track reflects. The self-assesment
+Label data includes three parts in total: the self-assessment of subjects, the difficulty
+level experimenters design and the performance the track reflects. The self-assessment
 is the subjective label data and the difficulty level and the performance are the
 objective data.
 
-For the self-assesment, after the entire experiment were finished,
+For the self-assessment, after the entire experiment were finished,
 each subjects were asked to fill a table about their emotion state during
 operating different tasks. There were seven level the subjects could choose.
 "1" means the most positive emotion state, "4" means neutral emotion state and
@@ -293,8 +300,8 @@ asked the subjects to touch three points without time constraint, which means th
 we assumed the most positive emotion state could be stimulated by this task.
 On the contrary, in hard task, we asked the subjects to touch five points with a ninety seconds
 constraint, which means that we assumed the most negtive emotion state could be stimulated by
-this task. We used "2.5", "4" and "5.5" to represent the emotion states different difficulty levels
-we assumed could stimulate.
+this task. We used "2.5", "4" and "5.5" to represent the emotion states that different difficulty levels
+could stimulate in our assumption.
 
 For the performance, we recorded the tip trajectory of mechnical arm. As showed
 in Fig.~\ref{fig:track}, in easy mode, the subjects were asked to touch orange
@@ -313,13 +320,18 @@ mentioned in Section 4, as the estimation of the emotion state of the subjects.
 We use the formula below to caculate the final label.
 
 \begin{equation}
-  L = [\frac{1}{2}L_{self-assessment} + \frac{1}{2}(L_{difficulty-level} +
-      L_{direction-change}) + \frac{1}{2}]
+  L =  [\ \frac{1}{2}L_{self-assessment} +
+      \frac{1}{2}(L_{difficulty-level} +  L_{direction-change}) + \frac{1}{2}\ ]
 \end{equation}
-where [x] means the largest integer not exceeding x,
-$L_{self-assessment}$ means the self-assessment score, $L_{difficulty-level}$
- means the difficulty level score, $L_{direction-change} = 3\frac{N_{direction-change} - N_{min}}
-{N_{max} - N_{min}} - 1.5$ means the direction change score, among them,
+where [x] means the largest integer not exceeding x. And in this equation \\
+$L_{self-assessment}$ means the self-assessment score,
+$L_{difficulty-level}$ means the difficulty level score,
+and $L_{direction-change}$ determined by equation below:
+\begin{equation}
+   L_{direction-change} = 3\frac{N_{direction-change} -
+   N_{min}}{N_{max} - N_{min}} - 1.5
+\end{equation}
+where $L_{direction-change}$ means the direction change score, among them,\\
 $N_{direction-change}$ means the number of direction changes,
 $N_{min}$ means the minium of $N_{direction-change}$ and
 $N_{max}$ means the maxium of $N_{direction-change}$.
@@ -336,13 +348,14 @@ The multi-scale feature extraction procedure are divided in two steps:
 1) sliding window selection and
 2) feature extraction.
 
-\paragraph{\textbf{\emph{Sliding Window Selection}}}
+\textbf{\emph{Sliding Window Selection}}
 
 Because uncertain relation between time interval and emotion state change,
-we chose 2s, 4s, 6s, 8s, 10s as the length of sliding window and 0.2s
+we chose every 2s between 4s to 30s as the length of sliding window and 0.2s
 as the length of stride to extract multi-scale features.
 
-\paragraph{\textbf{\emph{Feature Extraction}}}
+\textbf{\emph{Feature Extraction}}
+
 According to the paper\cite{Feature}, we chose 18 dimensions time domain features,
 which are statistical features,
 higher order crossings (HOC) features and fractal dimension feature, and 53
@@ -351,7 +364,10 @@ the ratio of mean band powers $\beta/\alpha$.
 
 \emph{Time Domain Features}
 
-In this paper, we chose seven \emph{statistical\ features} to represent the
+In this paper, we selected 3 classic time domain features in recognition process: statistical feature,
+higher order crossing (HOC) features and fractal dimension (FD) feature.
+
+There are seven \emph{statistical\ features} representing the
 raw EEG time series. These are:
 
 a) Mean: ${\mu}_{\bm{\eta}} = \frac{1}{T}\sum_{t=1}^T \bm{\eta}(t)$
@@ -369,16 +385,20 @@ f) 2nd difference: $\gamma_{\bm{\eta}} = \frac{1}{T-2}\sum_{t=1}^{T-2}|{\bm{\eta
 h) Normalized 2nd difference: $\bar{\gamma_{\bm{\eta}}} = \frac{\gamma_{\bm{\eta}}}{\sigma_{\bm{\eta}}}$
 
 To find more robust features and pattern of EEG, Petrantonakis and Hadjileontiadis proposed
- \emph{higher order crosssings (HOC)} features\cite{HOC}. Therefore we applied HOC to represent the raw EEG time series.
+ \emph{higher order crosssings (HOC)} features$^{\cite{HOC}}$. Therefore we applied HOC to represent the raw EEG time series.
 The higher order series could be caculated by the formula below:
+
 \begin{equation}
     H_k\{{\bm{\eta}}(t)\} = \nabla^{k-1}{\bm{\eta}}(t)
 \end{equation}
+
 where $\nabla$ means ${\bm{\eta}}(t) - {\bm{\eta}}(t-1)$. Therefore, the features
 of HOC could be caculated by counting the sign changes or equation below:
+
 \begin{equation}
   F_k = \sum_{t=1}^{T-k}\psi(H_k\{{\bm{\eta}}(t)\}H_k\{{\bm{\eta}}(t+1)\}), k = 1,2...10
 \end{equation}
+
 where $\psi(x)$ is a section function which is defined below:
 
 \begin{equation}
@@ -393,28 +413,40 @@ The \emph{fractal dimention (FD)} as a feature measuring the complexity is widel
 There are many mehtods computing the FD feature. In this paper, we chose to use
 the Higuchi algorithm\cite{FD} to caculate the FD feature. To compute the FD
 feature, the EEG series is rewritten as:
+
 \begin{equation}
     \{{\bm{\eta}}(p), {\bm{\eta}}(p+q), {\bm{\eta}}(p+2q), ... , {\bm{\eta}}(q+[\frac{T-q}{q}]q)\},\ p = 1,2,...,q
 \end{equation}
+
 where [x] means the largest integer less than x. Then we could define the series $M_p(q)$ as below:
+
 \begin{equation}
   M_p(q) = \frac{T-1}{[\frac{T-p}{q}]q^2}\sum_{k=1}^{[\frac{T-p}{q}]}|{\bm{\eta}}(p+kq) - {\bm{\eta}}(p+(k-1)q)|
 \end{equation}
+
  Therefore we could further define the average:
+
 \begin{equation}
   F(q) = \frac{1}{N_p}\sum_{p=1}^{N_p}M_p(q)
 \end{equation}
+
 where $N_p$ means the maxium of p.
 According to paper\cite{FD}, we knew that $F(p)$ is proportional to $p^{-F_{FD}}$
 (where $F_{FD}$ means the feature of FD). Therefore we could assumed:
+
 \begin{equation}
    F(q) = r\cdot{p^{-F_{FD}}}
 \end{equation}
+
 when we log the equation, we could obtain:
+
 \begin{equation}
   log(F(q)) = log(r) - {F_{FD}}log(p)
 \end{equation}
+
 Therefore we could obtain FD feature $F_{FD}$ by the slope of $log(F(q))$ to $log(p)$.
+
+\
 
 \emph{Frequency Domain Features}
 
@@ -504,7 +536,7 @@ And the mapping matrix is $M_{PCA} = (\vec{\mu_1^\prime},
 
 \subsection{Classification}
 \emph{Support vector machine (SVM)} is a effective classification proposed
-by $Cortes\ and\ Vapnik^{\cite{SVM}}$. Because the advantages of SVM in non-linear
+by Cortes\ and\ Vapnik$^{\cite{SVM}}$. Because the advantages of SVM in non-linear
 and high-dimensional pattern recognition, we applied it in our experiment as
 the classification.
 
@@ -566,7 +598,7 @@ process has been done 10 times for each specific parameter pair to eliminate the
 accidental errors.
 \subsection{Real Time Label Data Synthesis }
 As showed in Fig.~\ref{fig:label}, an example of the self-assessment score,
-the difficulty level score and the performance score were depicted.
+the difficulty level score and the performance score was depicted.
 The trend of the difficulty level score and the self-assessment is basically
 the same.
 
@@ -576,37 +608,61 @@ meets the need for obtaining real time label data to study the influence for rec
 accuracy when the multi-scale sliding window were used.
 
 \begin{figure}
+  \centering
   \includegraphics[width=12cm]{images/16}
   \caption{Real time label data synthesis}
   \label{fig:label}
-\end{figure}
-
-\subsection{Multi-scale Sliding Window}
-In our recognition experiment, multi-scale sliding windows were applied into
-extract features. Because the detecting window of the performance feature extraction
-in real time label data synthesis is 2s long, the scale of the sliding window
-should be longer than 2s. Therefore, we chose every 2s time interval from 4s to
-30s to explore the relation between the accuracy and the length of the sliding
-window. As showed in Fig.~\ref{fig:sliding},
-
-\begin{figure}
+% \end{figure}
+%
+% \begin{figure}
   \centering
   \includegraphics[width=18cm,angle=90]{17}
   \caption{Recognition accuracy about multi-scale sliding window and feature selection}
   \label{fig:sliding}
 \end{figure}
 
-\begin{tabular}{ccc}
-  \toprule
-  Length& 4s& 性别\\
-  \midrule
-  Ch'en Meng& 001& Male\\
-  Sarah Brightman& 002& Female\\
-  \bottomrule
-  \end{tabular}
+\subsection{Multi-scale Sliding Window}
+In our recognition experiment, multi-scale sliding windows were applied into
+extracting features. Because the detecting window of the performance feature extraction
+in real time label data synthesis is 2s long, the scale of the sliding window
+should be longer than 2s. Therefore, we chose every 2s time interval from 4s to
+30s to explore the relation between the accuracy and the length of the sliding
+window.
+
+As showed in Fig.~\ref{fig:sliding}, the recognition accuracy tends to
+increase slightly as a whole when the sliding window grows longer. Specically,
+when the length of the sliding window is 4s, the recognition accuracy using
+frequency domain features is about 65\%, which is obiviously lower than the
+other length of sliding window. And when the length of selected window is
+longer than 20s, the recognition accuracy using frequency domain features
+is almost stable at around 80\%. This phenomena indicates that the emotion
+state is a more stable state of mind that requires a longer period of time
+data to represent.
+
+\subsection{Feature Selection}
+As showed in Fig.~\ref{fig:sliding}, when we fix the parameter of the sliding window
+length, the accuracy is highest in using frequency domain feature. And the accuracy
+is about the same in using time domain feature and the combination of time and frequency
+feature. This phenomena indicates that PCA could not select the more important
+feature componets beacuse PCA reduces the dimension of feature map just by using
+the information of convariance. Therefore, the PCA which could barely use the label
+information is unsuitable for EEG signal process.
+And the higher recognition accuracy also indicates that frequency domain features
+are more important for affective recognition by using EEG signal.
+
+
+
+
 \section{Conclusion}
-
-
+In this paper, we combine the objective evaluation to the self-assessment to obtain
+real time label of the emotion state. The result of combination reflects the influction
+of emotion state. And the recognition experiment indicates that the emotion is
+a state of mind that requires a longer period of time to be effectively characterized
+and recognized. In subsequent affective recognition experiments, relatively longer
+EEG data is more appropriate for affective recognition. Meanwhile, the recognition
+experiment also illustrates that the frequency domain features are significantly
+more important than time domain features. In future EEG analysis work, relatively
+long frequency domain features might be a more preferred option.
 
 \begin{thebibliography}{4}
 
@@ -662,6 +718,7 @@ Real-time fractal-based valence level recognition from EEG[M]
 \bibitem{SVM} Cortes C, Vapnik V.
 Support-vector networks[J].
 Machine learning, 1995, 20(3): 273-297.
+
 \end{thebibliography}
 
 

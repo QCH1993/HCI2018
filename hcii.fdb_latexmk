@@ -44,13 +44,13 @@
   "llncs.cls" 1516543216 42883 271b24d426a51b6c1c27d8179541db82 ""
   (generated)
   "hcii.aux"
-  "hcii.log"
   "hcii.dvi"
-["xdvipdfmx"] 1518016913 "hcii.xdv" "hcii.pdf" "hcii" 1518016927
-  "hcii.xdv" 1518016913 253816 e0eb4dfd7fbf803d4e65cb274524377b "xelatex"
+  "hcii.log"
+["xdvipdfmx"] 1518088268 "hcii.xdv" "hcii.pdf" "hcii" 1518088283
+  "hcii.xdv" 1518088268 284468 74e59fd6e4ab94998d57a6ba34835eb8 "xelatex"
   (generated)
   "hcii.pdf"
-["xelatex"] 1518016913 "hcii.tex" "hcii.xdv" "hcii" 1518016927
+["xelatex"] 1518088268 "hcii.tex" "hcii.xdv" "hcii" 1518088283
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1480098698 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1480098698 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -109,8 +109,8 @@
   "/usr/local/texlive/2017/texmf-var/web2c/xetex/xelatex.fmt" 1513779851 3704921 ba99633f71dd478b00732c756bf70385 ""
   "/usr/local/texlive/2017/texmf.cnf" 1513779828 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "17.eps" 1518016328 44203 6136349e1c6d21f756d4e0f5c62c7791 ""
-  "hcii.aux" 1518016913 5537 347ad83e61b6327448182473b2ff876c ""
-  "hcii.tex" 1518016912 31571 3fe7866e03446a58274514d580e67ccf ""
+  "hcii.aux" 1518088268 5456 dcd60104ffffdad798dcf4541d583135 ""
+  "hcii.tex" 1518088267 34580 27410f6d2927a7d0dfdcc3d1615ac39e ""
   "images/1.png" 1517673120 211291 a7128418bf29edce9fe3c56fedc15713 ""
   "images/10.eps" 1517751501 241294 f91bc22094dc78834669eb19882442ae ""
   "images/11.eps" 1517751509 231282 68a170ef1c3fbd81059549a65aafba02 ""
