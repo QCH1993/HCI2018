@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.12.20)  8 FEB 2018 19:11
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.12.20)  9 FEB 2018 10:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -333,10 +333,10 @@ LaTeX Warning: Float too large for page by 99.26935pt on input line 622.
 Here is how much of TeX's memory you used:
  2418 strings out of 493010
  29352 string characters out of 6134663
- 103692 words of memory out of 5000000
+ 104692 words of memory out of 5000000
  6306 multiletter control sequences out of 15000+600000
  13148 words of font info for 62 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  28i,20n,26p,224b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on hcii.xdv (16 pages, 284468 bytes).
+Output written on hcii.xdv (16 pages, 284924 bytes).

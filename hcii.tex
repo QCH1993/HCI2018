@@ -30,16 +30,16 @@ Shanghai, 200240, P.R. China\\
 \begin{abstract}
 Human-robot interaction is a crucial field in human factor field and mechnical
 arm operation is a widely used form in human-robot interaction.
-However, the mistaken operations caused by the emotion influction
+However, the mistaken operations caused by the affect influction
 of operators are still one of the dominant reasons causing accidents. Because of
-the close link between emotion state and human error, in this paper, we analyzed
+the close link between affective state and human error, in this paper, we analyzed
 the EEG signal of five subjects operating mechanical arm and the track record of
 the mechnical arm movement. A combination label model including the subjective part and
-objective part are proposed to reflect the real time emotion state influction. Addtionally,
-in subsequent recognition experiment, the results indicate that the emotion is
+the objective part are proposed to reflect the real time affective state influction. Addtionally,
+in subsequent recognition experiment, the results indicate that the affect is
 a state of mind that requires a relatively longer period of time to be effectively represented
 and the frequency domain features are significantly more important than time domain features
-in emotion recognition process using EEG signal.
+in affective recognition process using EEG signal.
 \keywords{Affective recognition, Mechanical arm, Time domain features,
 Frequency domain features, Multi-scale sliding window}
 \end{abstract}
@@ -49,10 +49,10 @@ Hitherto, mechanical arm, as a vital product in industry field, has been broadly
 used in medical, exploration, rescue field etc. However, the mistaken operation
 caused by human error, which should have been avoided, is still one of the
 dominant reasons causing accidents. As we all know, the performance of human has a
-close link to the cognitive state of human and to some degree emotion is the
+close link to the cognitive state of human and to some degree affect is the
 main reason causing the change of the cognitive state. Therefore, one of the
 critical ways to avoid huamn error in mechanical arm operation is recognizing
-the emotion during the opreration process through detecting the physiological
+the affect during the opreration process through detecting the physiological
 signal. Since R. W. Picard has defined $Affective\ Computing\ (AC)^{\cite{AC}}$
 in 1995, affective computing has been a critical field in human-computer
 interaction area. There are numerous physiological signals which could reflect
@@ -65,7 +65,7 @@ activity. Therefore this paper chooses to use 32 dry electrodes EEG signal acqui
 equipment to obtain EEG signal data during mechanical arm operation.
 
 
-There are lots of models which have been proposed to describe the emotion, such as
+There are lots of models which have been proposed to describe the affect, such as
 six basic emotions model proposed by Ekman et al.\cite{Ekman}, eight basic emotions
 model proposed by Plutchik\cite{Plutchik} and the valence-arousal scale proposed
 by Russell\cite{Russell}. For simplifing this problem, this paper chooses to use the
@@ -74,21 +74,21 @@ And the valence reflecting the positive or negative aspect of the subjects is en
 to describe the cognitive state of the subjects.
 
 
-Besides the model of emotion, the way to obatain the ground truth of the subjects cognitive state
+Besides the affective model, the way to obatain the ground truth of the subjects cognitive state
 is also crucial. Almost all research in Affective Computing field use the self-assessment
 scores to estimate the true cognitive state of the subjects. However, even the subjects
-themselves could hardly to retell the exact emotion state in the mechanical arm operation
+themselves could hardly to retell the exact affective state in the mechanical arm operation
 and using one single scores to estimate the cognitive state during the entire operation process
 is obiviously not reasonable in detail. So this paper proposes to use objective and real time
 indexes to represent the cognitive state of the subjects. In this paper, we record the track
 of the end point of the mechanical arm and extract the features of the track to represent
 the fluctuation of the cognitive state of the subjects. Meanwhile, we assume that the workload
-and the time pressure could stimulate the emotion change of the subjects, so we give a
-basic score, which reflects the emotion state the subjects should be, and add the weighted
-track features scores to the basic score to reflect the fluctuation of the emotion state.
+and the time pressure could stimulate the affective change of the subjects, so we give a
+basic score, which reflects the affective state the subjects should be, and add the weighted
+track features scores to the basic score to reflect the fluctuation of the affective state.
 
 In our experiment, we designed three levels of operating tasks in different difficulty to
-stimulate the emotion state change. And the level of difficulty is determined by the
+stimulate the affective state change. And the level of difficulty is determined by the
 workload and the time pressure. To eliminate the influence of unfamilarity, one minute
 of free exploration is added before these three tasks and to eliminate the interaction
 of different tasks, a 30 seconds reset time interval is added between the different
@@ -107,7 +107,7 @@ to the value of the weighted relative occurrence. And at the feature selection p
 we apply Principal Component Analysis (PCA) to
 select the extracted features above. And at the classification design process, we apply
 Support Vector Machine (SVM), which is an effective classification discriminator,
-to predict the emotion state.
+to predict the affective state.
 
 Here is the reminder organization of this paper: Section 2 introduce the
 apparatus used in the experiment and the detail experiment protocol. Section 3
@@ -178,7 +178,7 @@ In our experiment, we use Robot Operating System (ROS) to receive the control
 signal from joystick, release the control signal to mechnical arm, recieve the
 position information of the end point of the mechnical arm and record the track
 information with real time mark point in a sampling rate of
-10Hz.\footnote{Code url:\url{https://github.com/QCH1993/DobotMagician}} Meanwhile,
+10Hz.\footnote{Code url: \url{https://github.com/QCH1993/DobotMagician}} Meanwhile,
 real time EEG signal are recorded with mark information which could be used in
 subsequent time correcting process.
 
@@ -288,19 +288,19 @@ is the subjective label data and the difficulty level and the performance are th
 objective data.
 
 For the self-assessment, after the entire experiment were finished,
-each subjects were asked to fill a table about their emotion state during
+each subjects were asked to fill a table about their affective state during
 operating different tasks. There were seven level the subjects could choose.
-"1" means the most positive emotion state, "4" means neutral emotion state and
-"7" means the most negative emotion state. The greater the number, the worse the
-emotion state. And then we used each score to weighted each task.
+"1" means the most positive affective state, "4" means neutral affective state and
+"7" means the most negative affective state. The greater the number, the worse the
+affective state. And then we used each score to weighted each task.
 
 For the the difficulty level experimenters desgin, we simply gave the scores of
 difficulty according to the workload and the time pressure. In easy task, we
 asked the subjects to touch three points without time constraint, which means that
-we assumed the most positive emotion state could be stimulated by this task.
+we assumed the most positive affective state could be stimulated by this task.
 On the contrary, in hard task, we asked the subjects to touch five points with a ninety seconds
-constraint, which means that we assumed the most negtive emotion state could be stimulated by
-this task. We used "2.5", "4" and "5.5" to represent the emotion states that different difficulty levels
+constraint, which means that we assumed the most negtive affective state could be stimulated by
+this task. We used "2.5", "4" and "5.5" to represent the affective states that different difficulty levels
 could stimulate in our assumption.
 
 For the performance, we recorded the tip trajectory of mechnical arm. As showed
@@ -308,7 +308,7 @@ in Fig.~\ref{fig:track}, in easy mode, the subjects were asked to touch orange
 point, purple point and pink point in order from a random start point. We assumed
 that the subjects would feel positive when they moved the mechnical arm smoothly,
 so we counted the numbers of direction change, in selected sliding window
-mentioned in Section 4, as the estimation of the emotion state of the subjects.
+mentioned in Section 4, as the estimation of the affective state of the subjects.
 
 \begin{figure}
   \centering
@@ -350,7 +350,7 @@ The multi-scale feature extraction procedure are divided in two steps:
 
 \textbf{\emph{Sliding Window Selection}}
 
-Because uncertain relation between time interval and emotion state change,
+Because uncertain relation between time interval and affective state change,
 we chose every 2s between 4s to 30s as the length of sliding window and 0.2s
 as the length of stride to extract multi-scale features.
 
@@ -473,11 +473,11 @@ b) Minium: $P_{max} = max(P(f)), f\in[f_a,f_b]$
 
 c) Maxium: $P_{min} = min(P(f)), f\in[f_a,f_b]$
 
-d) Varience: $ var(P) = \frac{1}{f_b-f_a}\sum_{f=f_a}^{f_b}|P(f)|^2$
+d) Varience: $ var(P) = \frac{1}{f_b-f_a}\sum_{f=f_a}^{f_b}|P(f)-\mu_p|^2$
 
 Similarly, we could divide the frequency band in a higher resolution to obtain
 \emph{STFT bin power} features. We divided the 1-64 Hz band into 32 subband, which
-means 32 $\Delta f = 2Hz$ bands are extracted for further processing.
+means 32 ($\Delta f = 2Hz$) bands are extracted for further processing.
 And then, for each $\Delta f$ band, we could caculate the STFT bin power
 feature by the formula above.
 
@@ -602,7 +602,7 @@ the difficulty level score and the performance score was depicted.
 The trend of the difficulty level score and the self-assessment is basically
 the same.
 
-After adding the performance score, as we assumed that the emotion state
+After adding the performance score, as we assumed that the affective state
 is unstable even in the same task, there are some real time influction which
 meets the need for obtaining real time label data to study the influence for recognition
 accuracy when the multi-scale sliding window were used.
@@ -635,7 +635,7 @@ when the length of the sliding window is 4s, the recognition accuracy using
 frequency domain features is about 65\%, which is obiviously lower than the
 other length of sliding window. And when the length of selected window is
 longer than 20s, the recognition accuracy using frequency domain features
-is almost stable at around 80\%. This phenomena indicates that the emotion
+is almost stable at around 80\%. This phenomena indicates that the affective
 state is a more stable state of mind that requires a longer period of time
 data to represent.
 
@@ -655,13 +655,14 @@ are more important for affective recognition by using EEG signal.
 
 \section{Conclusion}
 In this paper, we combine the objective evaluation to the self-assessment to obtain
-real time label of the emotion state. The result of combination reflects the influction
-of emotion state. And the recognition experiment indicates that the emotion is
+real time label of the affective state. The result of combination reflects the influction
+of affective state. And the recognition experiment indicates that the affect is
 a state of mind that requires a longer period of time to be effectively characterized
-and recognized. In subsequent affective recognition experiments, relatively longer
+and recognized. In subsequent affective recognition experiments,
+the results shows that relatively longer
 EEG data is more appropriate for affective recognition. Meanwhile, the recognition
 experiment also illustrates that the frequency domain features are significantly
-more important than time domain features. In future EEG analysis work, relatively
+more important than the time domain features. In future EEG analysis work, relatively
 long frequency domain features might be a more preferred option.
 
 \begin{thebibliography}{4}

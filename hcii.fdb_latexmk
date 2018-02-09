@@ -43,14 +43,14 @@
   "hcii.tex" 1517559522 2536 950b6913563359b2c1f0aed27d7f8eab ""
   "llncs.cls" 1516543216 42883 271b24d426a51b6c1c27d8179541db82 ""
   (generated)
-  "hcii.aux"
   "hcii.dvi"
+  "hcii.aux"
   "hcii.log"
-["xdvipdfmx"] 1518088268 "hcii.xdv" "hcii.pdf" "hcii" 1518088283
-  "hcii.xdv" 1518088268 284468 74e59fd6e4ab94998d57a6ba34835eb8 "xelatex"
+["xdvipdfmx"] 1518141614 "hcii.xdv" "hcii.pdf" "hcii" 1518141629
+  "hcii.xdv" 1518141614 284924 1f4ed367e8892c49e52cbbac455103f9 "xelatex"
   (generated)
   "hcii.pdf"
-["xelatex"] 1518088268 "hcii.tex" "hcii.xdv" "hcii" 1518088283
+["xelatex"] 1518141614 "hcii.tex" "hcii.xdv" "hcii" 1518141628
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1480098698 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1480098698 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -109,15 +109,15 @@
   "/usr/local/texlive/2017/texmf-var/web2c/xetex/xelatex.fmt" 1513779851 3704921 ba99633f71dd478b00732c756bf70385 ""
   "/usr/local/texlive/2017/texmf.cnf" 1513779828 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "17.eps" 1518016328 44203 6136349e1c6d21f756d4e0f5c62c7791 ""
-  "hcii.aux" 1518088268 5456 dcd60104ffffdad798dcf4541d583135 ""
-  "hcii.tex" 1518088267 34580 27410f6d2927a7d0dfdcc3d1615ac39e ""
+  "hcii.aux" 1518141614 5456 dcd60104ffffdad798dcf4541d583135 ""
+  "hcii.tex" 1518141427 34659 595e2a059e644167db8abc412915c3af ""
   "images/1.png" 1517673120 211291 a7128418bf29edce9fe3c56fedc15713 ""
   "images/10.eps" 1517751501 241294 f91bc22094dc78834669eb19882442ae ""
   "images/11.eps" 1517751509 231282 68a170ef1c3fbd81059549a65aafba02 ""
   "images/12.eps" 1517751518 243637 453ef11367d54ea82fce90ca320c617d ""
   "images/13.eps" 1517751524 241428 4a38c3cf55497fdbc71dda2726b0e11e ""
   "images/14.eps" 1517896115 778570 0a43841c77aaa9b9ecdff9a26abfdfab ""
-  "images/15.png" 1517894576 47931 e0046eddf63fca239f017b8d9e0adfc2 ""
+  "images/15.png" 1518141565 43478 32cb6592b54c5afa7f9b87bb7872ed10 ""
   "images/16.eps" 1518006693 80272 30bb079bdc74b83a0b23cd9f42b1d737 ""
   "images/2.eps" 1517711308 38655 bcd9970d2ecc9fee9ad5ad2372feac1c ""
   "images/3.png" 1517713999 8013794 1b59cb96546ef802e06d674caa98e7df ""
@@ -129,6 +129,6 @@
   "images/9.eps" 1517751489 254021 0aadf8bb58cc55e78055d944dccf97a3 ""
   "llncs.cls" 1516543216 42883 271b24d426a51b6c1c27d8179541db82 ""
   (generated)
-  "hcii.aux"
   "hcii.xdv"
   "hcii.log"
+  "hcii.aux"
